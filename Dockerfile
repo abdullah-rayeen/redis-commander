@@ -1,10 +1,7 @@
-FROM debian:jessie
-MAINTAINER Abdullah Haneef "abdullah.rayeen@gmail.com"
+FROM node:latest
 
-ENV DEBIAN_FRONTEND noninteractive
-
-ADD install.sh install.sh
-RUN chmod +x install.sh && ./install.sh && rm install.sh
+RUN npm install -g redis-commander
 
 EXPOSE 8081
-CMD bash -c 'redis-commander --redis-host $REDIS_PORT_6379_TCP_ADDR'
+
+CMD redis-commander --redis-host $REDIS_PORT_6379_TCP_ADDR --redis-port 6379 -p 8081
